@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Лаба 11</title>
+  </head>
+  <body>
+    <script>
+      function part1() {
+        let animal = {
+          jumps: null,
+        };
+        let rabbit = {
+          __proto__: animal,
+          jumps: true,
+        };
+        console.log("1)");
+        console.log(rabbit.jumps);
+
+        delete rabbit.jumps;
+
+        console.log(rabbit.jumps);
+
+        delete animal.jumps;
+
+        console.log(rabbit.jumps);
+      }
+
+      function part2() {
+        let head = {
+          glasses: 1,
+        };
+
+        let table = {
+          __proto__: head,
+          pen: 3,
+        };
+
+        let bed = {
+          __proto__: table,
+          sheet: 1,
+          pillow: 2,
+        };
+
+        let pockets = {
+          __proto__: bed,
+          money: 2000,
+        };
+        console.log("2)");
+        console.log(bed.glasses);
+        let startTime = performance.now();
+        const glasses1 = pockets.glasses;
+        let resultTime = performance.now() - startTime;
+        console.log(`pockets.glasses time to access: ${resultTime}`);
+        startTime = performance.now();
+        const glasses2 = head.glasses;
+        resultTime = performance.now() - startTime;
+        console.log(`head.glasses time to access: ${resultTime}`);
+      }
+
+      function part3() {
+        let animal = {
+          eat() {
+            this.full = true;
+          },
+        };
+
+        let rabbit = {
+          __proto__: animal,
+        };
+        console.log("3)");
+
+        rabbit.eat();
+        console.log(`animal.full:${animal.full}`);
+        console.log(`rabbit.full:${rabbit.full}`);
+      }
+
+      function part4() {
+        let hamster = {
+          stomach: [],
+
+          eat(food) {
+            if(this.stomach){
+              this.stomach = [...this.stomach, food]
+            }else{
+              this.stomach = [food]
+            }
+          },
+        };
+
+        let speedy = {
+          __proto__: hamster,
+        };
+
+        let lazy = {
+          __proto__: hamster,
+        };
+
+        console.log('4)')
+        speedy.eat("apple");
+        console.log(speedy.stomach);
+
+        console.log(lazy.stomach);
+      }
+
+      part1();
+      part2();
+      part3();
+      part4();
+    </script>
+  </body>
+</html>
